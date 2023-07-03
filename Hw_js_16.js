@@ -1,30 +1,31 @@
-class Animal {
-    constructor(name) {
-        this.name = name
-        this.speed = 0
+class Marker {
+    constructor(color, ink) {
+        this.color = color;
+        this.ink = ink;
     }
-    run(speed) {
-        this.speed += speed
-        console.log(`${this.name} runs with speed ${this.speed} km/h`)
-    }
-    stop() {
-        this.speed = 0
-        console.log(`${this.name} stops!`)
-    }
-}
-class Rabbit extends Animal {
-    hide() {
-        console.log(`${this.name} hides!`)
-    }
-    stop() {
-        // this.speed = 0
-        // console.log(`${this.name} stops!`)
-        super.stop()
-        this.hide()
+
+    print(text) {
+        let printedText = '';
+        for (let i = 0; i < text.length; i++) {
+            if (text[i] !== ' ' && this.ink > 0) {
+                printedText += text[i];
+                this.ink -= 0.5;
+            } else {
+                printedText += ' ';
+            }
+        }
+        document.write(`<h1 style="color: ${this.color}">${printedText}</h1>`);
     }
 }
-let rabbit = new Rabbit("White rabbit")
-rabbit.run(20)
-rabbit.run(10)
-rabbit.stop()
-rabbit.hide()
+let marker = new Marker('blue', 50);
+marker.print('Hello, Web-31');
+
+class RefilMarker extends Marker{
+    fill(inks){
+        this.ink += inks
+    }
+}
+let refilMarker = new RefilMarker ('red', 30)
+refilMarker.print('Im refil marker')
+refilMarker.fill(50)
+refilMarker.print('Hellow my class')
